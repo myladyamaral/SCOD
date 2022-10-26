@@ -38,13 +38,17 @@ public class Main {
 					opcao = menuPrincipal();
 				}
 				else if(opcao== 2) {
+					campanhas.forEach(x -> Campanha.calculaStatus(x));
+					Campanha.listar(campanhas);
+					opcao = menuPrincipal();
+				}
+				else if(opcao== 5) {
 					Campanha.listar(campanhas);
 					opcao = menuPrincipal();
 				}
 				else if(opcao== 6) {
 					System.out.println("Adicionar item a Meta");
 					int i = indexCampanha();
-				
 					campanhas.get(i).setMeta(
 							Campanha.cadastrarMeta(campanhas.get(i).getMeta(),
 							Item.cadastrar()));
@@ -58,6 +62,7 @@ public class Main {
 				}
 				
 	
+				
 		}
 		sc.close();
 	}

@@ -53,21 +53,32 @@ public class Campanha {
 		//se metas estiver vazio adiciona item a meta
 		if(meta.size() == 0) {
 			meta.add(item);
+			System.out.println("Primeiro item adicionado a meta: "+item);
+			return meta;
 		}
 		else {
 			//Se houver itens na meta ela é percorrida 
 			for(int i=0;i<=meta.size()-1;i++) {
 				if(meta.get(i).getNome().equals(item.getNome())) {
 					//se o item já existir na lista a quantidade é somada ao total
-					meta.get(i).setQuantidade(
-							(meta.get(i).getQuantidade() + item.getQuantidade()));
-					System.out.println(item.getQuantidade()+ " adicionado a meta");
+					double q = item.getQuantidade()+meta.get(i).getQuantidade();
+					Item i2 = new Item();
+					i2.setNome(meta.get(i).getNome());
+					i2.setQuantidade(q);
+					i2.setUndMedida(meta.get(i).getUndMedida());
+					i2.setDescricao(q+" de "+i2.getNome());
+					meta.add(i2);
+					meta.remove(i);
+					System.out.println(i2+ " alterado");
+					return meta;
 				}
 				else {
 					meta.add(item);
+					System.out.println("Item: "+item+" adicionado a meta");
+					return meta;
 				}
 			}
-			System.out.println(item+ " adicionado a meta");
+			
 		}
 		return meta;
 	}
@@ -78,10 +89,15 @@ public class Campanha {
 	}
 	
 	public static void calculaStatus(Campanha c) {
-		double totalMeta = 0,totalDoacoes;
-		for(int i = 0;i<=c.meta.size();i++) {
+		double totalMeta = 0,totalDoacoes = 0;
+		for(int i = 0;i<=c.meta.size()-1;i++) {
 			totalMeta+=c.meta.get(i).getQuantidade();
 		}
+		for(int i = 0;i<=c.doacoes.size()-1;i++) {
+			totalDoacoes+=c.doacoes.get(i).getItem().getQuantidade();
+		}
+		double a = totalMeta/100;
+		c.status = totalDoacoes*a;
 	}
 	
 	public String getNome() {
@@ -126,7 +142,7 @@ public class Campanha {
 
 	@Override
 	public String toString() {
-		return  nome + ", " + entidade + ", " + vencimento;
+		return  nome + ", " + entidade + ", "+ status+"%"+ ", "+ vencimento;
 	}
 
 	

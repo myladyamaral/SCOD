@@ -7,11 +7,13 @@ public class Item {
 	static Scanner sc = new Scanner(System.in);
 	
 	private String nome;
-	private Double quantidade;
+	private double quantidade;
 	private String descricao;
 	private String undMedida;
 	
 	public Item() {}
+	public Item(String nome, double quantidade, String medida) {
+	}
 
 	public static Item cadastrar() {
 		Item i = new Item();
@@ -39,7 +41,7 @@ public class Item {
 		return quantidade;
 	}
 
-	public void setQuantidade(Double quantidade) {
+	public void setQuantidade(double quantidade) {
 		this.quantidade = quantidade;
 	}
 
@@ -51,6 +53,12 @@ public class Item {
 		this.descricao = descricao;
 	}
 
+	public String getUndMedida() {
+		return undMedida;
+	}
+	public void setUndMedida(String undMedida) {
+		this.undMedida = undMedida;
+	}
 	@Override
 	public String toString() {
 		return descricao;
