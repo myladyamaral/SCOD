@@ -1,24 +1,28 @@
 package entidades;
 
-import java.util.List;
+
 import java.util.Scanner;
 
 public class Item {
 	static Scanner sc = new Scanner(System.in);
 	
 	private String nome;
-	private int quantidade;
+	private Double quantidade;
 	private String descricao;
+	private String undMedida;
 	
 	public Item() {}
 
 	public static Item cadastrar() {
 		Item i = new Item();
 		System.out.println("Nome do item:");
-		i.nome = sc.next();
+		i.nome = sc.nextLine();
 		System.out.println("Quantidade:");
-		i.quantidade = sc.nextInt();
-		i.descricao = i.quantidade+" de "+i.nome;
+		i.quantidade = sc.nextDouble();
+		System.out.println("Medida:");
+		String buffer = sc.nextLine();
+		i.undMedida = sc.nextLine();
+		i.descricao = i.quantidade+" "+i.undMedida+" de "+i.nome;
 		return i;
 	}
 	
@@ -31,11 +35,11 @@ public class Item {
 		this.nome = nome;
 	}
 
-	public int getQuantidade() {
+	public Double getQuantidade() {
 		return quantidade;
 	}
 
-	public void setQuantidade(int quantidade) {
+	public void setQuantidade(Double quantidade) {
 		this.quantidade = quantidade;
 	}
 
@@ -49,7 +53,7 @@ public class Item {
 
 	@Override
 	public String toString() {
-		return "Item: nome=" + nome + ", quantidade=" + quantidade + ", descricao=" + descricao + "";
+		return descricao;
 	}
 	
 }
